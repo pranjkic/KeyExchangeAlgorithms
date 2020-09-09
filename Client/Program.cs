@@ -26,19 +26,18 @@ namespace Client
                     byte[] encryptedSessionKey = null;
                     byte[] encryptedMessage = null;
                     byte[] iv = null;
-                    while(true)
-                    {
-                        Console.WriteLine("Insert message: ");
-                        string message = Console.ReadLine();
-                        Send(rsaKey, message, out iv, out encryptedSessionKey, out encryptedMessage);
-                        keyExchangeChannel.Receive(iv, encryptedSessionKey, encryptedMessage);
-                    }
+                    
+                    Console.WriteLine("Insert message: ");
+                    string message = Console.ReadLine();
+                    Send(rsaKey, message, out iv, out encryptedSessionKey, out encryptedMessage);
+                    keyExchangeChannel.Receive(iv, encryptedSessionKey, encryptedMessage);                    
                 }
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+            Console.WriteLine("To exit press enter.");
             Console.ReadLine();
         }
 

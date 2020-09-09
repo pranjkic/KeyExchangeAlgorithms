@@ -14,7 +14,7 @@ namespace Server
             using (ServiceHost host = new ServiceHost(typeof(KeyExchange)))
             {
                 host.Open();
-                Console.WriteLine("Servis je uspesno pokrenut ");
+                Console.WriteLine("Service is ready.");
                 Console.ReadKey();
                 host.Close();
             }
