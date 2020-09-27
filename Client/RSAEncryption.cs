@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public class RSAChannel
+    public class RSAEncryption
     {
         public static void Encrypt(IKeyExchange RSAKeyExchangeChannel)
         {

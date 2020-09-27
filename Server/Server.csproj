@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="DiffeHellmanKey.cs" />
     <Compile Include="DiffeHellmanKeyExchange.cs" />
-    <Compile Include="KeyExchange.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RSAKey.cs" />

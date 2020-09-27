@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public class DiffeHellmanChannel
+    public class DiffeHellmanEncryption
     {
         public static void Encrypt(IKeyExchange DiffeHellmanKeyExchangeChannel)
         {

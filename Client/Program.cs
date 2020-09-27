@@ -20,8 +20,8 @@ namespace Client
             IKeyExchange DiffeHellmanKeyExchangeChannel = DHconnection.CreateChannel();
             try
             {
-                RSAChannel.Encrypt(RSAKeyExchangeChannel);
-                DiffeHellmanChannel.Encrypt(DiffeHellmanKeyExchangeChannel);
+                RSAEncryption.Encrypt(RSAKeyExchangeChannel);
+                DiffeHellmanEncryption.Encrypt(DiffeHellmanKeyExchangeChannel);
             }
             catch(Exception e)
             {
