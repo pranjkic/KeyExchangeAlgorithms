@@ -11,12 +11,17 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            using (ServiceHost host = new ServiceHost(typeof(KeyExchange)))
+            using (ServiceHost RSAHost = new ServiceHost(typeof(RSAKeyExchange)))
             {
-                host.Open();
-                Console.WriteLine("Service is ready.");
-                Console.ReadKey();
-                host.Close();
+                using (ServiceHost DiffeHellmanHost = new ServiceHost(typeof(DiffeHellmanKeyExchange)))
+                {
+                    RSAHost.Open();
+                    DiffeHellmanHost.Open();
+                    Console.WriteLine("Service is ready.");
+                    Console.ReadKey();
+                    RSAHost.Close();
+                    DiffeHellmanHost.Close();
+                }
             }
         }
     }
