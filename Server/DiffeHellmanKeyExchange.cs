@@ -21,9 +21,10 @@ namespace Server
         {
             using (Aes aes = new AesCryptoServiceProvider())
             {
-                aes.Key = DiffeHellmanKey.key.DeriveKeyMaterial(CngKey.Import(/*Alice.alicePublicKey*/alicePublicKey, CngKeyBlobFormat.EccPublicBlob)); ;
+                CngKey cngKey = CngKey.Import(alicePublicKey, CngKeyBlobFormat.EccPublicBlob);
+                aes.Key = DiffeHellmanKey.key.DeriveKeyMaterial(cngKey);
                 aes.IV = iv;
-                // Decrypt the message
+                
                 using (MemoryStream plaintext = new MemoryStream())
                 {
                     using (CryptoStream cs = new CryptoStream(plaintext, aes.CreateDecryptor(), CryptoStreamMode.Write))
