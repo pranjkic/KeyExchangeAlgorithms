@@ -24,7 +24,11 @@ namespace Server
                 CngKey cngKey = CngKey.Import(alicePublicKey, CngKeyBlobFormat.EccPublicBlob);
                 aes.Key = DiffeHellmanKey.key.DeriveKeyMaterial(cngKey);
                 aes.IV = iv;
-                
+
+                string aesKey = "";
+                for (int i = 0; i < aes.Key.Length; i++)
+                    aesKey += aes.Key[i].ToString();
+
                 using (MemoryStream plaintext = new MemoryStream())
                 {
                     using (CryptoStream cs = new CryptoStream(plaintext, aes.CreateDecryptor(), CryptoStreamMode.Write))
@@ -32,7 +36,12 @@ namespace Server
                         cs.Write(encryptedMessage, 0, encryptedMessage.Length);
                         cs.Close();
                         string message = Encoding.UTF8.GetString(plaintext.ToArray());
-                        Console.WriteLine(message);
+                        Console.WriteLine("Diffie-Hellman key exchange\n" +
+                                          "Sesion key - " +
+                                          aesKey +
+                                          "\nMessage - " +
+                                          message +
+                                          "\n");
                     }
                 }
             }

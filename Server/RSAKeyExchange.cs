@@ -27,6 +27,11 @@ namespace Server
 
                 aes.Key = keyDeformatter.DecryptKeyExchange(encryptedSessionKey);
 
+                string aesKey = "";
+                for(int i = 0; i < aes.Key.Length; i++)                
+                    aesKey += aes.Key[i].ToString();
+                
+
                 using (MemoryStream plaintext = new MemoryStream())
                 using (CryptoStream cs = new CryptoStream(plaintext, aes.CreateDecryptor(), CryptoStreamMode.Write))
                 {
@@ -34,7 +39,12 @@ namespace Server
                     cs.Close();
 
                     string message = Encoding.UTF8.GetString(plaintext.ToArray());
-                    Console.WriteLine(message);
+                    Console.WriteLine("RSA key exchange\n" +
+                                      "Sesion key - " +
+                                      aesKey +
+                                      "\nMessage - " +
+                                      message +
+                                      "\n");
                 }
             }
         }

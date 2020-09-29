@@ -17,7 +17,7 @@ namespace Server
                 {
                     RSAHost.Open();
                     DiffeHellmanHost.Open();
-                    Console.WriteLine("Service is ready.");
+                    Console.WriteLine("Service is ready.\n");
                     Console.ReadKey();
                     RSAHost.Close();
                     DiffeHellmanHost.Close();

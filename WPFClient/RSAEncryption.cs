@@ -11,7 +11,7 @@ namespace WPFClient
 {
     public class RSAEncryption
     {
-        public static void Encrypt(IKeyExchange RSAKeyExchangeChannel, string message)
+        public static void Encrypt(IKeyExchange RSAKeyExchangeChannel, string message, out byte[] sessionKey)
         {
             byte[] serverPublicKey = RSAKeyExchangeChannel.GetPublicKey();
 
@@ -22,16 +22,19 @@ namespace WPFClient
                 byte[] encryptedMessage = null;
                 byte[] iv = null;
 
-                Send(rsaKey, message, out iv, out encryptedSessionKey, out encryptedMessage);
+                byte[] aesKey = null;
+                Send(rsaKey, message, out iv, out encryptedSessionKey, out encryptedMessage, out aesKey);
+                sessionKey = aesKey;
                 RSAKeyExchangeChannel.Receive(iv, encryptedSessionKey, encryptedMessage);
             }
         }
 
-        private static void Send(RSA key, string secretMessage, out byte[] iv, out byte[] encryptedSessionKey, out byte[] encryptedMessage)
+        private static void Send(RSA key, string secretMessage, out byte[] iv, out byte[] encryptedSessionKey, out byte[] encryptedMessage, out byte[] sessionKey)
         {
             using (Aes aes = new AesCryptoServiceProvider())
             {
                 iv = aes.IV;
+                sessionKey = aes.Key;
 
                 RSAOAEPKeyExchangeFormatter keyFormatter = new RSAOAEPKeyExchangeFormatter(key);
                 encryptedSessionKey = keyFormatter.CreateKeyExchange(aes.Key, typeof(Aes));

@@ -48,11 +48,33 @@ namespace WPFClient
             if(!string.IsNullOrWhiteSpace(message))
             {
                 TextBox.Text = "";
-                messages.Add(message);
+                //messages.Add(message);
                 if (RSA.IsChecked == true)
-                    RSAEncryption.Encrypt(RSAKeyExchangeChannel, message);
+                {
+                    byte[] sessionKey = null;
+                    RSAEncryption.Encrypt(RSAKeyExchangeChannel, message, out sessionKey);
+                    string aesKey = "";
+                    for (int i = 0; i < sessionKey.Length; i++)
+                        aesKey += sessionKey[i].ToString();
+                    messages.Add("RSA key exchange\n" +
+                                 "Session key - " + 
+                                 aesKey+"\n" +
+                                 "Message - "+
+                                 message);
+                }
                 else
-                    DiffeHellmanEncryption.Encrypt(DiffeHellmanKeyExchangeChannel, message);
+                {
+                    byte[] sessionKey = null;
+                    DiffeHellmanEncryption.Encrypt(DiffeHellmanKeyExchangeChannel, message, out sessionKey);
+                    string aesKey = "";
+                    for (int i = 0; i < sessionKey.Length; i++)
+                        aesKey += sessionKey[i].ToString();
+                    messages.Add("Diffie-Hellman key exchange\n" +
+                                 "Session key - " +
+                                 aesKey + "\n" +
+                                 "Message - " +
+                                 message);
+                }                    
             }
             else
                 MessageBox.Show("Please insert message first.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);

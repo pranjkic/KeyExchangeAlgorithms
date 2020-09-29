@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="450"  HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="550" Width="700"  HorizontalAlignment="Center" VerticalAlignment="Center" WindowStartupLocation="CenterScreen">
 
 	<Grid Background="LightBlue">
 		<Label Content="Exchange session key." HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="93" VerticalAlignment="Top"  FontSize="26" FontFamily="Segoe UI" FontWeight="Bold" Background="CadetBlue" Foreground="White"/>
@@ -20,9 +20,9 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 
-		<Button Content="Send" HorizontalAlignment="Left" Margin="384,346,0,0" VerticalAlignment="Top" Width="40" Height="45" Click="Button_Click" Background="CadetBlue"/>
-		<TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="45" Margin="10,346,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="369" BorderBrush="Black" BorderThickness="1"/>
+		<Button Content="Send" HorizontalAlignment="Left" Margin="604,446,0,0" VerticalAlignment="Top" Width="70" Height="40" Click="Button_Click" IsDefault="True" Background="CadetBlue" RenderTransformOrigin="6.65,0.544"/>
+		<TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="40" Margin="10,446,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="589" BorderBrush="Black" BorderThickness="1"/>
 		<RadioButton GroupName="keyExchange" Name="RSA" IsChecked="True" Content="RSA key exchange" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top"/>
-		<RadioButton GroupName="keyExchange" Name="DH" IsChecked="False" Content="Diffe Hellman key exchange" HorizontalAlignment="Left" Margin="134,106,0,0" VerticalAlignment="Top"/>
+		<RadioButton GroupName="keyExchange" Name="DH" IsChecked="False" Content="Diffie Hellman key exchange" HorizontalAlignment="Left" Margin="134,106,0,0" VerticalAlignment="Top"/>
 	</Grid>
 </Window>
